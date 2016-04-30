@@ -11,7 +11,27 @@ style('kranslations', 'style');
 
     <div id="app-content">
         <div id="app-content-wrapper">
-            <p>Раздел материалов курса, доступных пользователю пользователь</p>
+            <header>
+                <h1><?php p($_['course']['section'] . '/' . $_['course']['name']) ?></h1>
+            </header>
+            <table>
+                <thead>
+                <tr>
+                    <th>Тип</th>
+                    <th>Наименование</th>
+                    <th>Состояние</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($_['materials'] as $material): ?>
+                    <tr>
+                        <td><?php p($material['type']) ?></td>
+                        <td><?php p($material['name']) ?></td>
+                        <td><?php p($material['state']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

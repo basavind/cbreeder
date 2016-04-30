@@ -71,7 +71,30 @@ class DesktopController extends Controller
      */
     public function course($anchor)
     {
-        $params = ['user' => $this->userId];
+        $params = [
+            'user' => $this->userId,
+            'course' => [
+                'section' => 'Mathematics',
+                'name' => 'Differential equations'
+            ],
+            'materials' => [
+                [
+                    'type' => 'Assignments',
+                    'name' => 'Assignment 1',
+                    'state' => 'new',
+                ],
+                [
+                    'type' => 'Assignments',
+                    'name' => 'Assignment 2',
+                    'state' => 'reverted',
+                ],
+                [
+                    'type' => 'Exams',
+                    'name' => 'Exam 2',
+                    'state' => 'working',
+                ],
+            ]
+        ];
         return new TemplateResponse('kranslations', 'desktop.course', $params);  // templates/main.php
     }
 
