@@ -40,7 +40,22 @@ class DesktopController extends Controller
      */
     public function courses()
     {
-        $params = ['user' => $this->userId];
+        $params = [
+            'user' => $this->userId,
+            'courses' => [
+                [
+                    'anchor' => 1,
+                    'section' => 'Mathematics',
+                    'name' => 'Differential equations',
+                    'materials' => [
+                        'total' => 5,
+                        'available' => 3,
+                        'completed' => 2,
+                        'reverted' => 1
+                    ]
+                ]
+            ]
+        ];
         return new TemplateResponse('kranslations', 'desktop.courses', $params);  // templates/main.php
     }
 
@@ -54,10 +69,10 @@ class DesktopController extends Controller
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function materials()
+    public function course($anchor)
     {
         $params = ['user' => $this->userId];
-        return new TemplateResponse('kranslations', 'desktop.materials', $params);  // templates/main.php
+        return new TemplateResponse('kranslations', 'desktop.course', $params);  // templates/main.php
     }
 
 

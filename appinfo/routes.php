@@ -22,6 +22,6 @@ return [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
         ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
         ['name' => 'desktop#courses', 'url' => '/desktop/courses', 'verb' => 'GET'],
-        ['name' => 'desktop#materials', 'url' => '/desktop/materials', 'verb' => 'GET'],
+        ['name' => 'desktop#course', 'url' => '/desktop/courses/{anchor}', 'verb' => 'GET'],
     ]
 ];
