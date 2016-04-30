@@ -5,7 +5,7 @@
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author Dmitry Savin <basavind@gmail.com>
+ * @author    Dmitry Savin <basavind@gmail.com>
  * @copyright Dmitry Savin 2016
  */
 
@@ -19,7 +19,9 @@
  */
 return [
     'routes' => [
-	   ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-	   ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
+        ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
+        ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
+        ['name' => 'desktop#courses', 'url' => '/desktop/courses', 'verb' => 'GET'],
+        ['name' => 'desktop#materials', 'url' => '/desktop/materials', 'verb' => 'GET'],
     ]
 ];
