@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<info>
+    <id>kranslations</id>
+    <name>Kranslations</name>
+    <description>Kursomir translation app</description>
+    <licence>AGPL</licence>
+    <author>Dmitry Savin</author>
+    <version>0.0.1</version>
+    <namespace>Kranslations</namespace>
+    <category>other</category>
+    <dependencies>
+        <owncloud min-version="9" />
+    </dependencies>
+</info>
