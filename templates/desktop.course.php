@@ -19,6 +19,7 @@ style('kranslations', 'style');
                 <tr>
                     <th>Тип</th>
                     <th>Наименование</th>
+                    <th>Позиция</th>
                     <th>Состояние</th>
                 </tr>
                 </thead>
@@ -27,6 +28,7 @@ style('kranslations', 'style');
                     <tr>
                         <td><?php p($material['type']) ?></td>
                         <td><?php p($material['name']) ?></td>
+                        <td><?php p($material['stage']) ?></td>
                         <td><?php p($material['state']) ?></td>
                     </tr>
                 <?php endforeach; ?>

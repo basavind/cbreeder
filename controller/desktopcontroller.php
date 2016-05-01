@@ -82,16 +82,19 @@ class DesktopController extends Controller
                     'type' => 'Assignments',
                     'name' => 'Assignment 1',
                     'state' => 'new',
+                    'stage' => 'translation',
                 ],
                 [
                     'type' => 'Assignments',
                     'name' => 'Assignment 2',
                     'state' => 'reverted',
+                    'stage' => 'redaction',
                 ],
                 [
                     'type' => 'Exams',
                     'name' => 'Exam 2',
                     'state' => 'working',
+                    'stage' => 'correction',
                 ],
             ]
         ];
