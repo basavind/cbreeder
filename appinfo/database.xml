@@ -154,8 +154,7 @@
             <field>
                 <name>course_id</name>
                 <type>integer</type>
-                <default>NULL</default>
-                <notnull>false</notnull>
+                <notnull>true</notnull>
                 <length>4</length>
             </field>
             <field>

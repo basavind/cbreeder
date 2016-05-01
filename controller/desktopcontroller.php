@@ -1,6 +1,9 @@
 <?php
-/**
- * ownCloud - kranslations
+
+namespace OCA\Kranslations\Controller;
+
+/*
+ * ownCloud - kranslations.
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -9,8 +12,7 @@
  * @copyright Dmitry Savin 2016
  */
 
-namespace OCA\Kranslations\Controller;
-
+use OCA\Kranslations\DB\MaterialMapper;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -18,14 +20,33 @@ use OCP\IRequest;
 
 class DesktopController extends Controller
 {
-
-
+    /**
+     * Auth user id.
+     *
+     * @var int
+     */
     private $userId;
 
-    public function __construct($AppName, IRequest $request, $UserId)
+    /**
+     * Map materials from db.
+     *
+     * @var \OCA\Kranslations\DB\MaterialMapper
+     */
+    private $materialMapper;
+
+    /**
+     * DesktopController constructor.
+     *
+     * @param string                              $AppName
+     * @param \OCP\IRequest                       $request
+     * @param                                     $UserId
+     * @param \OCA\Kranslations\DB\MaterialMapper $materialMapper
+     */
+    public function __construct($AppName, IRequest $request, $UserId, MaterialMapper $materialMapper)
     {
         parent::__construct($AppName, $request);
         $this->userId = $UserId;
+        $this->materialMapper = $materialMapper;
     }
 
     /**
@@ -33,7 +54,7 @@ class DesktopController extends Controller
      *          required and no CSRF check. If you don't know what CSRF is, read
      *          it up in the docs or you might create a security hole. This is
      *          basically the only required method to add this exemption, don't
-     *          add it to any other method if you don't exactly know what it does
+     *          add it to any other method if you don't exactly know what it does.
      *
      * @NoAdminRequired
      * @NoCSRFRequired
@@ -51,11 +72,12 @@ class DesktopController extends Controller
                         'total' => 5,
                         'available' => 3,
                         'completed' => 2,
-                        'reverted' => 1
-                    ]
-                ]
-            ]
+                        'reverted' => 1,
+                    ],
+                ],
+            ],
         ];
+
         return new TemplateResponse('kranslations', 'desktop.courses', $params);  // templates/main.php
     }
 
@@ -64,7 +86,7 @@ class DesktopController extends Controller
      *          required and no CSRF check. If you don't know what CSRF is, read
      *          it up in the docs or you might create a security hole. This is
      *          basically the only required method to add this exemption, don't
-     *          add it to any other method if you don't exactly know what it does
+     *          add it to any other method if you don't exactly know what it does.
      *
      * @NoAdminRequired
      * @NoCSRFRequired
@@ -75,7 +97,7 @@ class DesktopController extends Controller
             'user' => $this->userId,
             'course' => [
                 'section' => 'Mathematics',
-                'name' => 'Differential equations'
+                'name' => 'Differential equations',
             ],
             'materials' => [
                 [
@@ -96,14 +118,14 @@ class DesktopController extends Controller
                     'state' => 'working',
                     'stage' => 'correction',
                 ],
-            ]
+            ],
         ];
+
         return new TemplateResponse('kranslations', 'desktop.course', $params);  // templates/main.php
     }
 
-
     /**
-     * Simply method that posts back the payload of the request
+     * Simply method that posts back the payload of the request.
      *
      * @NoAdminRequired
      */
@@ -111,6 +133,4 @@ class DesktopController extends Controller
     {
         return new DataResponse(['echo' => $echo]);
     }
-
-
 }
