@@ -4,7 +4,7 @@ namespace OCA\CBreeder\DB;
 
 use OCP\AppFramework\Db\Entity;
 
-class Material extends Entity
+abstract class Material extends Entity
 {
     /**
      * Material possible states.
@@ -83,8 +83,10 @@ class Material extends Entity
     {
         $this->setStage($this->stages[0]);
         $this->setState(self::STATE_AVAILABLE);
-        $this->setType($this->typeValue);
+        $this->setType($this->getClassName());
     }
+
+    abstract protected function getClassName();
 
     /**
      * Update material stage up to the next one, accordingly to material type.
@@ -152,5 +154,36 @@ class Material extends Entity
         }
 
         return true;
+    }
+
+    /**
+     * Maps the keys of the row array to the attributes.
+     *
+     * @param array $row the row to map onto the entity
+     *
+     * @return static
+     *
+     * @throws \Exception
+     *
+     * @since 7.0.0
+     */
+    public static function fromRow(array $row)
+    {
+        if ( ! isset($row['type']) || ! class_exists($row['type'])) {
+            throw new \Exception('Такого материала не существует!');
+        }
+
+        $class = $row['type'];
+        $instance = new $class();
+
+        foreach ($row as $key => $value) {
+            $prop = ucfirst($instance->columnToProperty($key));
+            $setter = 'set'.$prop;
+            $instance->$setter($value);
+        }
+
+        $instance->resetUpdatedFields();
+
+        return $instance;
     }
 }
