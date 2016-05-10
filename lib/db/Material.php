@@ -48,6 +48,10 @@ abstract class Material extends Entity
 
     private function init()
     {
+        if ( ! count($this->stages)) {
+            throw new \LogicException('Class does not realize production scenario!');
+        }
+
         $this->setStage($this->stages[0]);
         $this->setState(self::STATE_AVAILABLE);
         $this->setType(get_class($this));
