@@ -67,7 +67,7 @@ abstract class Material extends Entity
     public function stageUp()
     {
         if ( ! $this->updateStage('up', self::STATE_AVAILABLE)) {
-            throw \Exception('Возникла непредвиденная ошибка при попытке изменения стадии материала!');
+            throw \Exception('An unexpected error occurred while attempting to change the stage of the material!');
         }
 
         return $this;
@@ -83,7 +83,7 @@ abstract class Material extends Entity
     public function stageDown()
     {
         if ( ! $this->updateStage('down', self::STATE_REVERTED)) {
-            throw \Exception('Возникла непредвиденная ошибка при попытке изменения стадии материала!');
+            throw \Exception('An unexpected error occurred while attempting to change the stage of the material!');
         }
 
         return $this;
@@ -119,7 +119,7 @@ abstract class Material extends Entity
             $this->setStage($newStage);
             $this->setState($state);
         } else {
-            throw \Exception('Стадия материала не существует!');
+            throw \Exception('The material stage does not exist!');
         }
 
         return true;
@@ -139,7 +139,7 @@ abstract class Material extends Entity
     public static function fromRow(array $row)
     {
         if ( ! isset($row['type']) || ! class_exists($row['type'])) {
-            throw new \Exception('Такого материала не существует!');
+            throw new \Exception('Material type class does not exists!');
         }
 
         $class = $row['type'];
