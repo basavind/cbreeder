@@ -19,7 +19,7 @@ style('cbreeder', 'style');
                 <tr>
                     <th>Тип</th>
                     <th>Наименование</th>
-                    <th>Позиция</th>
+                    <th>Стадия</th>
                     <th>Состояние</th>
                 </tr>
                 </thead>
