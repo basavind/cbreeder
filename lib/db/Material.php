@@ -75,6 +75,15 @@ class Material extends Entity
         $this->addType('stage', 'string');
         $this->addType('state', 'string');
         $this->addType('type', 'string');
+
+        $this->init();
+    }
+
+    private function init()
+    {
+        $this->setStage($this->stages[0]);
+        $this->setState(self::STATE_AVAILABLE);
+        $this->setType($this->typeValue);
     }
 
     /**
@@ -121,27 +130,25 @@ class Material extends Entity
      */
     protected function updateStage($direction, $state)
     {
-        foreach ($this->stages as $key => $stage) {
-            if ($this->stage === $stage) {
-                switch ($direction) {
-                    case 'up':
-                        $newKey = $key + 1;
-                        break;
-                    case 'down':
-                        $newKey = $key - 1;
-                        break;
-                    default:
-                        $newKey = $key;
-                }
-                if (isset($this->stages[$key + 1])) {
-                    $this->stage = $this->stages[$newKey];
-                    $this->state = $state;
-                    break;
-                } else {
-                    throw \Exception('Стадия материала не существует!');
-                }
-            }
-            throw \Exception('Искомая стадия материала не найдена!');
+        $stageKey = array_search($this->stage, $this->stages);
+
+        switch ($direction) {
+            case 'up':
+                $newKey = $stageKey + 1;
+                break;
+            case 'down':
+                $newKey = $stageKey - 1;
+                break;
+            default:
+                $newKey = $stageKey;
+        }
+
+        if (isset($this->stages[$newKey])) {
+            $newStage = $this->stages[$newKey];
+            $this->setStage($newStage);
+            $this->setState($state);
+        } else {
+            throw \Exception('Стадия материала не существует!');
         }
 
         return true;
