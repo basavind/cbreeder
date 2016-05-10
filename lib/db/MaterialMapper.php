@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\Kranslations\DB;
+namespace OCA\Cbreeder\DB;
 
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
@@ -14,7 +14,7 @@ class MaterialMapper extends Mapper
      */
     public function __construct(IDBConnection $db)
     {
-        parent::__construct($db, 'kranslations_materials');
+        parent::__construct($db, 'cbreeder_materials');
     }
 
     /**
@@ -26,7 +26,7 @@ class MaterialMapper extends Mapper
      */
     public function find($id)
     {
-        $sql = 'SELECT * FROM `*PREFIX*kranslations_materials`'.
+        $sql = 'SELECT * FROM `*PREFIX*cbreeder_materials`'.
             'WHERE `id` = ?';
 
         return $this->findEntity($sql, [$id]);
@@ -42,7 +42,7 @@ class MaterialMapper extends Mapper
      */
     public function findAll($limit = null, $offset = null)
     {
-        $sql = 'SELECT * FROM `*PREFIX*kranslations_materials`';
+        $sql = 'SELECT * FROM `*PREFIX*cbreeder_materials`';
 
         return $this->findEntities($sql, $limit, $offset);
     }

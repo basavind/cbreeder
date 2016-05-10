@@ -1,5 +1,5 @@
 /**
- * ownCloud - kranslations
+ * ownCloud - cbreeder
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -16,7 +16,7 @@
 		});
 
 		$('#echo').click(function () {
-			var url = OC.generateUrl('/apps/kranslations/echo');
+			var url = OC.generateUrl('/apps/cbreeder/echo');
 			var data = {
 				echo: $('#echo-content').val()
 			};

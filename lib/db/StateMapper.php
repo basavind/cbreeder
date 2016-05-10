@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\Kranslations\DB;
+namespace OCA\CBreder\DB;
 
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
@@ -14,7 +14,7 @@ class StateMapper extends Mapper
      */
     public function __construct(IDBConnection $db)
     {
-        parent::__construct($db, 'kranslations_states');
+        parent::__construct($db, 'cbreeder_states');
     }
 
     /**
@@ -26,7 +26,7 @@ class StateMapper extends Mapper
      */
     public function find($id)
     {
-        $sql = 'SELECT * FROM `*PREFIX*kranslations_states`'.
+        $sql = 'SELECT * FROM `*PREFIX*cbreeder_states`'.
             'WHERE `id` = ?';
 
         return $this->findEntity($sql, [$id]);
@@ -42,7 +42,7 @@ class StateMapper extends Mapper
      */
     public function findAll($limit = null, $offset = null)
     {
-        $sql = 'SELECT * FROM `*PREFIX*kranslations_states`';
+        $sql = 'SELECT * FROM `*PREFIX*cbreeder_states`';
 
         return $this->findEntities($sql, $limit, $offset);
     }

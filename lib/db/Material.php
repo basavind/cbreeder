@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\Kranslations\DB;
+namespace OCA\CBreeder\DB;
 
 use OCP\AppFramework\Db\Entity;
 

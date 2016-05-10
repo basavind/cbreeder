@@ -35,7 +35,7 @@ before_install:
     # install core
     - cd ../
     - ocdev setup core --dir owncloud --branch $CORE_BRANCH --no-history
-    - mv kranslations owncloud/apps/
+    - mv cbreeder owncloud/apps/
 
 before_script:
     - createuser -U travis -s oc_autotest
@@ -45,9 +45,9 @@ before_script:
     - cd owncloud
     - mkdir data
     - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
-    - ./occ app:enable kranslations
+    - ./occ app:enable cbreeder
     - ocdev server &
-    - cd apps/kranslations
+    - cd apps/cbreeder
 
 script:
     - make test

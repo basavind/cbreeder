@@ -6,7 +6,7 @@
     <charset>utf8</charset>
 
     <table>
-        <name>*dbprefix*kranslations_sections</name>
+        <name>*dbprefix*cbreeder_sections</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -31,7 +31,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*kranslations_courses</name>
+        <name>*dbprefix*cbreeder_courses</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -62,7 +62,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*kranslations_stages</name>
+        <name>*dbprefix*cbreeder_stages</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -95,7 +95,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*kranslations_states</name>
+        <name>*dbprefix*cbreeder_states</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -121,7 +121,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*kranslations_material_types</name>
+        <name>*dbprefix*cbreeder_material_types</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -141,7 +141,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*kranslations_materials</name>
+        <name>*dbprefix*cbreeder_materials</name>
         <declaration>
             <field>
                 <name>id</name>

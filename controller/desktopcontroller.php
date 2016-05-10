@@ -1,9 +1,9 @@
 <?php
 
-namespace OCA\Kranslations\Controller;
+namespace OCA\CBreeder\Controller;
 
 /*
- * ownCloud - kranslations.
+ * ownCloud - cbreeder.
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -12,7 +12,7 @@ namespace OCA\Kranslations\Controller;
  * @copyright Dmitry Savin 2016
  */
 
-use OCA\Kranslations\DB\MaterialMapper;
+use OCA\CBreeder\DB\MaterialMapper;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -30,7 +30,7 @@ class DesktopController extends Controller
     /**
      * Map materials from db.
      *
-     * @var \OCA\Kranslations\DB\MaterialMapper
+     * @var \OCA\CBreeder\DB\MaterialMapper
      */
     private $materialMapper;
 
@@ -40,7 +40,7 @@ class DesktopController extends Controller
      * @param string                              $AppName
      * @param \OCP\IRequest                       $request
      * @param                                     $UserId
-     * @param \OCA\Kranslations\DB\MaterialMapper $materialMapper
+     * @param \OCA\CBreeder\DB\MaterialMapper $materialMapper
      */
     public function __construct($AppName, IRequest $request, $UserId, MaterialMapper $materialMapper)
     {
@@ -78,7 +78,7 @@ class DesktopController extends Controller
             ],
         ];
 
-        return new TemplateResponse('kranslations', 'desktop.courses', $params);  // templates/main.php
+        return new TemplateResponse('cbreeder', 'desktop.courses', $params);  // templates/main.php
     }
 
     /**
@@ -121,7 +121,7 @@ class DesktopController extends Controller
             ],
         ];
 
-        return new TemplateResponse('kranslations', 'desktop.course', $params);  // templates/main.php
+        return new TemplateResponse('cbreeder', 'desktop.course', $params);  // templates/main.php
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * ownCloud - kranslations
+ * ownCloud - cbreeder
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -9,7 +9,7 @@
  * @copyright Dmitry Savin 2016
  */
 
-namespace OCA\Kranslations\Controller;
+namespace OCA\CBreeder\Controller;
 
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -38,7 +38,7 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		$params = ['user' => $this->userId];
-		return new TemplateResponse('kranslations', 'main', $params);  // templates/main.php
+		return new TemplateResponse('cbreeder', 'main', $params);  // templates/main.php
 	}
 
 	/**

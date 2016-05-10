@@ -1,6 +1,6 @@
 <?php
 /**
- * ownCloud - kranslations
+ * ownCloud - cbreeder
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -9,7 +9,7 @@
  * @copyright Dmitry Savin 2016
  */
 
-namespace OCA\Kranslations\Controller;
+namespace OCA\CBreeder\Controller;
 
 use PHPUnit_Framework_TestCase;
 
@@ -25,7 +25,7 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 
 		$this->controller = new PageController(
-			'kranslations', $request, $this->userId
+			'cbreeder', $request, $this->userId
 		);
 	}
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * ownCloud - kranslations
+ * ownCloud - cbreeder
  *
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
@@ -9,7 +9,7 @@
  * @copyright Dmitry Savin 2016
  */
 
-namespace OCA\Kranslations\AppInfo;
+namespace OCA\CBreeder\AppInfo;
 
 use OCP\AppFramework\App;
 

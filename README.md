@@ -1,4 +1,4 @@
-# Kranslations
+# CBreeder
 Place this app in **owncloud/apps/**
 
 ## Building the app

@@ -1,6 +1,6 @@
 <?php
-script('kranslations', 'script');
-style('kranslations', 'style');
+script('cbreeder', 'script');
+style('cbreeder', 'style');
 ?>
 
 <div id="app">
