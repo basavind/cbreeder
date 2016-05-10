@@ -13,48 +13,18 @@ abstract class Material extends Entity
     const STATE_IN_WORK = 'В работе';
     const STATE_REVERTED = 'Возвращен на доработку';
     const STATE_COMPLETED = 'Завершён';
+
     /**
-     * Material name.
-     *
-     * @var string
+     * DB fields.
      */
     protected $name;
-    /**
-     * Related course id.
-     *
-     * @var int
-     */
     protected $courseId;
-    /**
-     * Related state id.
-     *
-     * @var int
-     */
     protected $state;
-    /**
-     * Related stage id.
-     *
-     * @var int
-     */
     protected $stage;
-    /**
-     * Filesystem mapping for material.
-     *
-     * @var string
-     */
     protected $path;
-    /**
-     * Material type.
-     *
-     * @var string
-     */
     protected $type;
-    /**
-     * Course part if it exists.
-     *
-     * @var string
-     */
     protected $coursePart;
+
     /**
      * The sequence of material production stages, based on material type.
      * Should be overrided in nested typed classes.
@@ -63,9 +33,6 @@ abstract class Material extends Entity
      */
     protected $stages = [];
 
-    /**
-     * Material constructor.
-     */
     public function __construct()
     {
         $this->addType('courseId', 'integer');
