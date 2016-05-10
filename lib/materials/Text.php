@@ -16,9 +16,4 @@ class Text extends Material
         'Предвыпуск',
         'Выпущен',
     ];
-
-    protected function getClassName()
-    {
-        return self::class;
-    }
 }

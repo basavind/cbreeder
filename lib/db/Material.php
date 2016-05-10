@@ -50,10 +50,8 @@ abstract class Material extends Entity
     {
         $this->setStage($this->stages[0]);
         $this->setState(self::STATE_AVAILABLE);
-        $this->setType($this->getClassName());
+        $this->setType(get_class($this));
     }
-
-    abstract protected function getClassName();
 
     /**
      * Update material stage up to the next one, accordingly to material type.
