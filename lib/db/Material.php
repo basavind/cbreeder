@@ -30,9 +30,17 @@ abstract class Material extends Entity
      * The sequence of material production stages, based on material type.
      * Should be overrided in nested typed classes.
      *
-     * @var array
+     * @return array
      */
-    protected $stages = [];
+    public static function getStages()
+    {
+        return static::$stages;
+    }
+
+    public static function getStage($id)
+    {
+        return static::$stages[$id];
+    }
 
     public function __construct()
     {
@@ -50,11 +58,11 @@ abstract class Material extends Entity
 
     private function init()
     {
-        if ( ! count($this->stages)) {
+        if ( ! count(self::getStages())) {
             throw new \LogicException('Class does not realize production scenario!');
         }
 
-        $this->setStage($this->stages[0]);
+        $this->setStage(self::getStage(0));
         $this->setState(self::STATE_AVAILABLE);
         $this->setClass(get_class($this));
     }
@@ -103,7 +111,7 @@ abstract class Material extends Entity
      */
     protected function updateStage($direction, $state)
     {
-        $stageKey = array_search($this->stage, $this->stages);
+        $stageKey = array_search($this->stage, self::$stages);
 
         switch ($direction) {
             case 'up':
@@ -116,8 +124,8 @@ abstract class Material extends Entity
                 $newKey = $stageKey;
         }
 
-        if (isset($this->stages[$newKey])) {
-            $newStage = $this->stages[$newKey];
+        if (in_array($newKey, self::$stages)) {
+            $newStage = self::$stages[$newKey];
             $this->setStage($newStage);
             $this->setState($state);
         } else {

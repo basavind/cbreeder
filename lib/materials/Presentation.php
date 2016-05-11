@@ -6,7 +6,7 @@ use OCA\CBreeder\DB\Material;
 
 class Presentation extends Material
 {
-    public $stages = [
+    public static $stages = [
         'Переведён',
         'Редактируется',
         'Отредактирован',
