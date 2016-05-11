@@ -12,30 +12,26 @@ class MaterialTest extends PHPUnit_Framework_TestCase
 {
     public function testTypedHydration()
     {
-        $attrs = [
+        $text = $this->dumpMaterial(Text::class);
+        $video = $this->dumpMaterial(Video::class);
+        $presentation = $this->dumpMaterial(Presentation::class);
+
+        $this->assertEquals(get_class($text), Text::class);
+        $this->assertEquals(get_class($video), Video::class);
+        $this->assertEquals(get_class($presentation), Presentation::class);
+    }
+
+    private function dumpMaterial($class = Text::class)
+    {
+        return Material::fromRow([
             'id' => 0,
             'name' => 'material',
             'path' => '/material',
             'course_part' => null,
             'state' => Material::STATE_AVAILABLE,
             'type' => null,
-        ];
-
-        $text = Material::fromRow(array_merge($attrs, [
-            'stage' => Text::getStage(0),
-            'class' => Text::class
-        ]));
-        $video = Material::fromRow(array_merge($attrs, [
-            'stage' => Video::getStage(0),
-            'class' => Video::class
-        ]));
-        $presentation = Material::fromRow(array_merge($attrs, [
-            'stage' => Presentation::getStage(0),
-            'class' => Presentation::class
-        ]));
-
-        $this->assertEquals(get_class($text), Text::class);
-        $this->assertEquals(get_class($video), Video::class);
-        $this->assertEquals(get_class($presentation), Presentation::class);
+            'stage' => $class::getStage(0),
+            'class' => $class,
+        ]);
     }
 }
