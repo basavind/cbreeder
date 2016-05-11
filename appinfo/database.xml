@@ -108,6 +108,12 @@
                 <length>100</length>
             </field>
             <field>
+                <name>class</name>
+                <type>text</type>
+                <notnull>false</notnull>
+                <length>50</length>
+            </field>
+            <field>
                 <name>course_part</name>
                 <type>text</type>
                 <notnull>false</notnull>

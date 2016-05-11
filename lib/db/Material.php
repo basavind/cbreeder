@@ -23,6 +23,7 @@ abstract class Material extends Entity
     protected $stage;
     protected $path;
     protected $type;
+    protected $class;
     protected $coursePart;
 
     /**
@@ -42,6 +43,7 @@ abstract class Material extends Entity
         $this->addType('stage', 'string');
         $this->addType('state', 'string');
         $this->addType('type', 'string');
+        $this->addType('class', 'string');
 
         $this->init();
     }
@@ -54,7 +56,7 @@ abstract class Material extends Entity
 
         $this->setStage($this->stages[0]);
         $this->setState(self::STATE_AVAILABLE);
-        $this->setType(get_class($this));
+        $this->setClass(get_class($this));
     }
 
     /**
@@ -138,11 +140,11 @@ abstract class Material extends Entity
      */
     public static function fromRow(array $row)
     {
-        if ( ! isset($row['type']) || ! class_exists($row['type'])) {
+        if ( ! isset($row['class']) || ! class_exists($row['class'])) {
             throw new \Exception('Material type class does not exists!');
         }
 
-        $class = $row['type'];
+        $class = $row['class'];
         $instance = new $class();
 
         foreach ($row as $key => $value) {
