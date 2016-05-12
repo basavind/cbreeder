@@ -26,10 +26,10 @@ style('cbreeder', 'style');
                 <tbody>
                 <?php foreach ($_['materials'] as $material): ?>
                     <tr>
-                        <td><?php p($material['type']) ?></td>
-                        <td><?php p($material['name']) ?></td>
-                        <td><?php p($material['stage']) ?></td>
-                        <td><?php p($material['state']) ?></td>
+                        <td><?php p($material->getType()) ?></td>
+                        <td><?php p($material->getName()) ?></td>
+                        <td><?php p($material->getStage()) ?></td>
+                        <td><?php p($material->getState()) ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

@@ -12,7 +12,7 @@ namespace OCA\CBreeder\Controller;
  * @copyright Dmitry Savin 2016
  */
 
-use OCA\CBreeder\DB\MaterialMapper;
+use OCA\Cbreeder\DB\MaterialMapper;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -32,21 +32,23 @@ class DesktopController extends Controller
      *
      * @var \OCA\CBreeder\DB\MaterialMapper
      */
-    private $materialMapper;
+    private $mapper;
 
     /**
      * DesktopController constructor.
      *
-     * @param string                              $AppName
-     * @param \OCP\IRequest                       $request
-     * @param                                     $UserId
-     * @param \OCA\CBreeder\DB\MaterialMapper $materialMapper
+     * @param string                          $AppName
+     * @param \OCP\IRequest                   $request
+     * @param \OCA\Cbreeder\DB\MaterialMapper $mapper
+     * @param                                 $UserId
+     *
+     * @internal param \OCA\CBreeder\DB\MaterialMapper $materialMapper
      */
-    public function __construct($AppName, IRequest $request, $UserId, MaterialMapper $materialMapper)
+    public function __construct($AppName, IRequest $request, MaterialMapper $mapper, $UserId)
     {
         parent::__construct($AppName, $request);
         $this->userId = $UserId;
-        $this->materialMapper = $materialMapper;
+        $this->mapper = $mapper;
     }
 
     /**
@@ -93,32 +95,14 @@ class DesktopController extends Controller
      */
     public function course($anchor)
     {
+        $materials = $this->mapper->findAll();
         $params = [
             'user' => $this->userId,
             'course' => [
                 'section' => 'Mathematics',
                 'name' => 'Differential equations',
             ],
-            'materials' => [
-                [
-                    'type' => 'Assignments',
-                    'name' => 'Assignment 1',
-                    'state' => 'new',
-                    'stage' => 'translation',
-                ],
-                [
-                    'type' => 'Assignments',
-                    'name' => 'Assignment 2',
-                    'state' => 'reverted',
-                    'stage' => 'redaction',
-                ],
-                [
-                    'type' => 'Exams',
-                    'name' => 'Exam 2',
-                    'state' => 'working',
-                    'stage' => 'correction',
-                ],
-            ],
+            'materials' => $materials,
         ];
 
         return new TemplateResponse('cbreeder', 'desktop.course', $params);  // templates/main.php
