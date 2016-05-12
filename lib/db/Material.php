@@ -2,6 +2,7 @@
 
 namespace OCA\CBreeder\DB;
 
+use OCA\CBreeder\Materials\UndefinedStageException;
 use OCP\AppFramework\Db\Entity;
 
 abstract class Material extends Entity
@@ -37,8 +38,17 @@ abstract class Material extends Entity
         return static::$stages;
     }
 
-    public static function getStage($id)
+    /**
+     * @param int $id
+     *
+     * @return string
+     */
+    public function getStageAt($id)
     {
+        if ($id >= count(static::$stages) || $id < 0) {
+            throw new UndefinedStageException();
+        }
+
         return static::$stages[$id];
     }
 
@@ -62,7 +72,7 @@ abstract class Material extends Entity
             throw new \LogicException('Class does not realize production scenario!');
         }
 
-        $this->setStage(self::getStage(0));
+        $this->setStage(self::getStageAt(0));
         $this->setState(self::STATE_AVAILABLE);
         $this->setClass(get_class($this));
     }
@@ -111,7 +121,7 @@ abstract class Material extends Entity
      */
     protected function updateStage($direction, $state)
     {
-        $stageKey = array_search($this->stage, self::$stages);
+        $stageKey = array_search($this->stage, self::getStages());
 
         switch ($direction) {
             case 'up':
@@ -124,12 +134,12 @@ abstract class Material extends Entity
                 $newKey = $stageKey;
         }
 
-        if (in_array($newKey, self::$stages)) {
-            $newStage = self::$stages[$newKey];
+        if (key_exists($newKey, self::getStages())) {
+            $newStage = self::getStageAt($newKey);
             $this->setStage($newStage);
             $this->setState($state);
         } else {
-            throw \Exception('The material stage does not exist!');
+            throw new \Exception('The material stage does not exist!');
         }
 
         return true;
@@ -140,7 +150,7 @@ abstract class Material extends Entity
      *
      * @param array $row the row to map onto the entity
      *
-     * @return static
+     * @return object
      *
      * @throws \Exception
      *
