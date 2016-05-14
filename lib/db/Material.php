@@ -175,4 +175,24 @@ abstract class Material extends Entity
 
         return $instance;
     }
+
+    /**
+     * Returns db properties as assoc array.
+     * 
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'course_id' => $this->getCourseId(),
+            'state' => $this->getState(),
+            'stage' => $this->getStage(),
+            'stages' => $this->getStages(),
+            'class' => $this->getClass(),
+            'type' => $this->getType(),
+            'course_part' => $this->getCoursePart(),
+        ];
+    }
 }

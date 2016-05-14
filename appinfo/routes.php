@@ -23,5 +23,6 @@ return [
         ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
         ['name' => 'desktop#courses', 'url' => '/desktop/courses', 'verb' => 'GET'],
         ['name' => 'desktop#course', 'url' => '/desktop/courses/{anchor}', 'verb' => 'GET'],
+        ['name' => 'material#stage', 'url' => '/material/{materialId}/stage/{direction}', 'verb' => 'POST'],
     ]
 ];
