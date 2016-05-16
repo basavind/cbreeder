@@ -15,7 +15,7 @@ class RoleManager
      *
      * @array
      */
-    const roles = [
+    public $roles = [
         'editor' => [
             'group' => 'Редактор',
             'stages' => ['На редакции'],
@@ -43,11 +43,11 @@ class RoleManager
      *
      * @return array
      */
-    public static function getRoles()
+    public function getRoles()
     {
         $roles = [];
         $user = OC_User::getUser();
-        foreach (self::roles as $role => $params) {
+        foreach ($this->roles as $role => $params) {
             if (OC::$server->getGroupManager()->isInGroup($user, $params['group'])) {
                 $roles[] = $role;
             }
@@ -61,11 +61,11 @@ class RoleManager
      *
      * @return array
      */
-    public static function getAllowedStages()
+    public function getAllowedStages()
     {
         $stages = [];
         $user = OC_User::getUser();
-        foreach (self::roles as $role => $params) {
+        foreach ($this->roles as $role => $params) {
             if (OC::$server->getGroupManager()->isInGroup($user, $params['group'])) {
                 $stages = array_merge($stages, $params['stages']);
             }
