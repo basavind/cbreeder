@@ -28,16 +28,21 @@
             var url = OC.generateUrl('/apps/cbreeder/material/' + id + '/stage/' + direction);
 
             var $tr = $('#mid' + id)
-            this.disableRow($tr);
+            this.toggleRowLoading($tr);
             $.post(url).success(function (response) {
                 if (response['ok']) {
+                    if (response['material'] === 'Not allowed') {
+                        this.toggleRowLoading($tr);
+                        return;
+                    }
+
                     MaterialHelper.updateRow($tr, response['material']);
                     MaterialHelper.bindStageClick($tr.find(MaterialHelper.stageLinkClass));
                 }
             })
         },
 
-        disableRow: function ($tr) {
+        toggleRowLoading: function ($tr) {
             $tr.html('').toggleClass('loading');
         },
 
@@ -51,7 +56,8 @@
                 + '<td>' + material['state'] + '</td>'
                 + buttons;
 
-            $tr.html(template).toggleClass('loading');
+            $tr.html(template);
+            this.toggleRowLoading($tr);
         }
     };
 

@@ -14,6 +14,8 @@ namespace OCA\CBreeder\Controller;
 
 use OCA\CBreeder\DB\Material;
 use OCA\Cbreeder\DB\MaterialMapper;
+use OCA\CBreeder\Materials\UndefinedStageException;
+use OCA\CBreeder\RoleManager\RoleManager;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
@@ -38,22 +40,32 @@ class MaterialController extends Controller
         'up' => 'stageUp',
         'down' => 'stageDown',
     ];
+    /**
+     * @var \OCA\CBreeder\RoleManager\RoleManager
+     */
+    private $roleManager;
 
     /**
      * DesktopController constructor.
      *
-     * @param string                          $AppName
-     * @param \OCP\IRequest                   $request
-     * @param \OCA\Cbreeder\DB\MaterialMapper $mapper
-     * @param                                 $UserId
+     * @param string                                $AppName
+     * @param \OCP\IRequest                         $request
+     * @param \OCA\Cbreeder\DB\MaterialMapper       $mapper
+     * @param \OCA\CBreeder\RoleManager\RoleManager $roleManager
+     * @param                                       $UserId
      *
      * @internal param \OCA\CBreeder\DB\MaterialMapper $materialMapper
      */
-    public function __construct($AppName, IRequest $request, MaterialMapper $mapper, $UserId)
+    public function __construct($AppName,
+                                IRequest $request,
+                                MaterialMapper $mapper,
+                                RoleManager $roleManager,
+                                $UserId)
     {
         parent::__construct($AppName, $request);
         $this->userId = $UserId;
         $this->mapper = $mapper;
+        $this->roleManager = $roleManager;
     }
 
     /**
@@ -67,6 +79,7 @@ class MaterialController extends Controller
      * @NoCSRFRequired
      *
      * @param $materialId
+     * @param $direction
      *
      * @return \OCP\AppFramework\Http\DataResponse
      */
@@ -90,12 +103,27 @@ class MaterialController extends Controller
             ]);
         }
 
-        $material->$method();
+        try {
+            $material->$method();
+        } catch (UndefinedStageException $e) {
+            return new DataResponse([
+                'ok' => false,
+                'material' => 'Material can not be staged '.$direction,
+            ]);
+        }
+
         $this->mapper->update($material);
 
-        return new DataResponse([
-            'ok' => true,
-            'material' => $material->toArray(),
-        ]);
+        if (in_array($material->getStage(), $this->roleManager->getAllowedStages())) {
+            return new DataResponse([
+                'ok' => true,
+                'material' => $material->toArray(),
+            ]);
+        } else {
+            return new DataResponse([
+                'ok' => true,
+                'material' => 'Not allowed',
+            ]);
+        }
     }
 }
