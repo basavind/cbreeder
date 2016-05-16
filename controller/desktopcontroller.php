@@ -66,21 +66,10 @@ class DesktopController extends Controller
      */
     public function courses()
     {
+        $courses = $this->mapper->getStats();
         $params = [
             'user' => $this->userId,
-            'courses' => [
-                [
-                    'anchor' => 1,
-                    'section' => 'Mathematics',
-                    'name' => 'Differential equations',
-                    'materials' => [
-                        'total' => 5,
-                        'available' => 3,
-                        'completed' => 2,
-                        'reverted' => 1,
-                    ],
-                ],
-            ],
+            'courses' => $courses,
         ];
 
         return new TemplateResponse('cbreeder', 'desktop.courses', $params);  // templates/main.php

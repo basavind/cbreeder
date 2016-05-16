@@ -14,27 +14,25 @@ style('cbreeder', 'style');
             <table>
                 <thead>
                 <tr>
-                    <th>Направление</th>
                     <th>Курс</th>
                     <th>Доступно</th>
+                    <th>В работе</th>
                     <th>Возвращено</th>
                     <th>Завершено</th>
-                    <th>Всего</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($_['courses'] as $course): ?>
                     <tr>
-                        <td><?php p($course['section']) ?></td>
                         <td>
-                            <a href="courses/<?php p($course['anchor']) ?>">
+                            <a href="courses/<?php p($course['id']) ?>">
                                 <?php p($course['name']) ?>
                             </a>
                         </td>
-                        <td><?php p($course['materials']['available']) ?></td>
-                        <td><?php p($course['materials']['reverted']) ?></td>
-                        <td><?php p($course['materials']['completed']) ?></td>
-                        <td><?php p($course['materials']['total']) ?></td>
+                        <td><?php p($course['available']) ?></td>
+                        <td><?php p($course['in_work']) ?></td>
+                        <td><?php p($course['reverted']) ?></td>
+                        <td><?php p($course['completed']) ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
