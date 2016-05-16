@@ -1,3 +1,3 @@
 <ul>
-    <li><a href="desktop/courses">Рабочий стол</a></li>
+    <li><a href="/apps/cbreeder/desktop/courses">Рабочий стол</a></li>
 </ul>
