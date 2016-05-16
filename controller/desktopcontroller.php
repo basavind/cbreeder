@@ -8,8 +8,8 @@ namespace OCA\CBreeder\Controller;
  * This file is licensed under the Affero General Public License version 3 or
  * later. See the COPYING file.
  *
- * @author    Dmitry Savin <basavind@gmail.com>
- * @copyright Dmitry Savin 2016
+ * @author    Dmitry Basavin <basavind@gmail.com>
+ * @copyright Dmitry Basavin 2016
  */
 
 use OCA\Cbreeder\DB\MaterialMapper;
@@ -44,7 +44,10 @@ class DesktopController extends Controller
      *
      * @internal param \OCA\CBreeder\DB\MaterialMapper $materialMapper
      */
-    public function __construct($AppName, IRequest $request, MaterialMapper $mapper, $UserId)
+    public function __construct($AppName,
+                                IRequest $request,
+                                MaterialMapper $mapper,
+                                $UserId)
     {
         parent::__construct($AppName, $request);
         $this->userId = $UserId;
@@ -95,7 +98,7 @@ class DesktopController extends Controller
      */
     public function course($anchor)
     {
-        $materials = $this->mapper->findAll();
+        $materials = $this->mapper->getAllowed();
         $params = [
             'user' => $this->userId,
             'course' => [
