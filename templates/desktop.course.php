@@ -33,10 +33,17 @@ style('cbreeder', 'style');
                         <td><?php p($material->getStage()) ?></td>
                         <td><?php p($material->getState()) ?></td>
                         <td>
-                            <button class="stage-material"
-                                    data-stage-direction="up">
-                                Завершить
-                            </button>
+                            <?php if ($material->getStage() !== $material->getLastStage()): ?>
+                                <button class="stage-material"
+                                        data-stage-direction="up">
+                                    Завершить
+                                </button>
+                            <?php else: ?>
+                                <button class="stage-material"
+                                        data-stage-direction="publish">
+                                    Опубликовать
+                                </button>
+                            <?php endif; ?>
                             <?php if ($material->getStage() !== $material->getStageAt(0)): ?>
                                 <button class="stage-material"
                                         data-stage-direction="down">

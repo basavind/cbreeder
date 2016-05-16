@@ -28,11 +28,12 @@
             var url = OC.generateUrl('/apps/cbreeder/material/' + id + '/stage/' + direction);
 
             var $tr = $('#mid' + id)
-            this.toggleRowLoading($tr);
+            $tr.html('');
+            MaterialHelper.toggleRowLoading($tr);
             $.post(url).success(function (response) {
                 if (response['ok']) {
                     if (response['material'] === 'Not allowed') {
-                        this.toggleRowLoading($tr);
+                        MaterialHelper.toggleRowLoading($tr);
                         return;
                     }
 
@@ -43,12 +44,14 @@
         },
 
         toggleRowLoading: function ($tr) {
-            $tr.html('').toggleClass('loading');
+            $tr.toggleClass('loading');
         },
 
         updateRow: function ($tr, material) {
-            var stageUpButton = '<button class="stage-material" data-stage-direction="up">Завершить</button>';
-            var stageDownButton = material['stage'] === 'Переведён' ? '' : '<button class="stage-material" data-stage-direction="down">Вернуть</button>';
+            var stageUpButton = material['stage'] !== 'На выпуске'
+                ? '<button class="stage-material" data-stage-direction="up">Завершить</button>'
+                : '<button class="stage-material" data-stage-direction="publish">Опубликовать</button>';
+            var stageDownButton = material['stage'] === 'На редакции' ? '' : '<button class="stage-material" data-stage-direction="down">Вернуть</button>';
             var buttons = '<td>' + stageUpButton + stageDownButton + '</td>';
             var template = '<td>' + material['type'] + '</td>'
                 + '<td>' + material['name'] + '</td>'
@@ -57,7 +60,7 @@
                 + buttons;
 
             $tr.html(template);
-            this.toggleRowLoading($tr);
+            MaterialHelper.toggleRowLoading($tr);
         }
     };
 

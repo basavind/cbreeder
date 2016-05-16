@@ -52,6 +52,14 @@ abstract class Material extends Entity
         return static::$stages[$id];
     }
 
+    /**
+     * @return string
+     */
+    public function getLastStage()
+    {
+        return static::$stages[count(static::$stages) - 1];
+    }
+
     public function __construct()
     {
         $this->addType('courseId', 'integer');
@@ -119,7 +127,7 @@ abstract class Material extends Entity
      *
      * @throws \Exception
      */
-    protected function updateStage($direction, $state)
+    protected function updateStage($direction, $state) //TODO Делать проверку на роль - иначе стейдж может "проскользнуть"
     {
         $stageKey = array_search($this->stage, self::getStages());
 
