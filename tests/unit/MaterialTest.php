@@ -69,10 +69,36 @@ class MaterialTest extends PHPUnit_Framework_TestCase
     {
         $material = $this->dumpMaterial();
 
-        $material->setStage($material->getStageAt(5));
+        $material->setStage($material->getStageAt(2));
         $material->stageDown();
 
-        $this->assertEquals($material->getStageAt(4), $material->getStage());
+        $this->assertEquals($material->getStageAt(1), $material->getStage());
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \OCA\CBreeder\Materials\UndefinedStageException
+     */
+    public function material_doesnt_stage_up_at_last_stage()
+    {
+        $material = $this->dumpMaterial();
+
+        $lastStage = $material->getStageAt(count($material->getStages()) - 1);
+        $material->setStage($lastStage);
+        $material->stageUp();
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \OCA\CBreeder\Materials\UndefinedStageException
+     */
+    public function material_doesnt_stage_down_at_zero_stage()
+    {
+        $material = $this->dumpMaterial();
+
+        $material->stageDown();
     }
 
     private function dumpMaterial($class = Text::class, $state = Material::STATE_AVAILABLE)

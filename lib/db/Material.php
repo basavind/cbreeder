@@ -139,7 +139,7 @@ abstract class Material extends Entity
             $this->setStage($newStage);
             $this->setState($state);
         } else {
-            throw new \Exception('The material stage does not exist!');
+            throw new UndefinedStageException('The material stage does not exist!');
         }
 
         return true;
