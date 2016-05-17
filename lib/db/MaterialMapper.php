@@ -88,7 +88,7 @@ class MaterialMapper extends Mapper
 
     public function getSectionsStats($limit = null, $offset = null)
     {
-        $sql = 'SELECT m.section as name, ' .
+        $sql = 'SELECT m.section as name, m.section_slug as slug, ' .
             'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, ' .
             'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, ' .
             'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, ' .

@@ -25,7 +25,7 @@ style('cbreeder', 'style');
                 <?php foreach ($_['sections'] as $section): ?>
                     <tr>
                         <td>
-                            <a href="section/<?php p($section['name']) ?>">
+                            <a href="section/<?php p($section['slug']) ?>">
                                 <?php p($section['name']) ?>
                             </a>
                         </td>

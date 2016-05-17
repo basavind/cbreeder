@@ -19,8 +19,11 @@ abstract class Material extends Entity
      * DB fields.
      */
     protected $name;
+    protected $name_slug;
     protected $section;
+    protected $section_slug;
     protected $course;
+    protected $course_slug;
     protected $state;
     protected $stage;
     protected $path;
@@ -64,8 +67,11 @@ abstract class Material extends Entity
     public function __construct()
     {
         $this->addType('section', 'string');
+        $this->addType('section_slug', 'string');
         $this->addType('course', 'string');
+        $this->addType('course_slug', 'string');
         $this->addType('name', 'string');
+        $this->addType('name_slug', 'string');
         $this->addType('path', 'string');
         $this->addType('coursePart', 'string');
         $this->addType('stage', 'string');
