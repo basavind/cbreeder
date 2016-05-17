@@ -23,10 +23,46 @@
                 <length>256</length>
             </field>
             <field>
+                <name>section_slug</name>
+                <type>text</type>
+                <notnull>true</notnull>
+                <length>256</length>
+            </field>
+            <field>
                 <name>course</name>
                 <type>text</type>
                 <notnull>true</notnull>
                 <length>256</length>
+            </field>
+            <field>
+                <name>course_slug</name>
+                <type>text</type>
+                <notnull>true</notnull>
+                <length>256</length>
+            </field>
+            <field>
+                <name>name</name>
+                <type>text</type>
+                <notnull>true</notnull>
+                <length>256</length>
+            </field>
+            <field>
+                <name>name_slug</name>
+                <type>text</type>
+                <notnull>true</notnull>
+                <length>256</length>
+            </field>
+            <field>
+                <name>course_part</name>
+                <type>text</type>
+                <notnull>false</notnull>
+                <default>NULL</default>
+                <length>256</length>
+            </field>
+            <field>
+                <name>path</name>
+                <type>clob</type>
+                <notnull>true</notnull>
             </field>
             <field>
                 <name>stage</name>
@@ -41,17 +77,6 @@
                 <length>50</length>
             </field>
             <field>
-                <name>name</name>
-                <type>text</type>
-                <notnull>true</notnull>
-                <length>256</length>
-            </field>
-            <field>
-                <name>path</name>
-                <type>clob</type>
-                <notnull>true</notnull>
-            </field>
-            <field>
                 <name>type</name>
                 <type>text</type>
                 <notnull>false</notnull>
@@ -62,13 +87,6 @@
                 <type>text</type>
                 <notnull>false</notnull>
                 <length>50</length>
-            </field>
-            <field>
-                <name>course_part</name>
-                <type>text</type>
-                <notnull>false</notnull>
-                <default>NULL</default>
-                <length>256</length>
             </field>
         </declaration>
     </table>
