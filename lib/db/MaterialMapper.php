@@ -72,17 +72,29 @@ class MaterialMapper extends Mapper
         return $this->findEntities($sql, $stages, $limit, $offset);
     }
 
-    public function getStats($limit = null, $offset = null)
+    public function getCoursesStats($course, $limit = null, $offset = null)
     {
-        $sql = 'SELECT c.id, c.name, ' .
+        $sql = 'SELECT m.course as name, ' .
             'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, ' .
             'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, ' .
             'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, ' .
             'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed ' .
             'FROM `*PREFIX*cbreeder_materials` m ' .
-            'INNER JOIN `*PREFIX*cbreeder_courses` c ON c.id = m.course_id ' .
-            'INNER JOIN `*PREFIX*cbreeder_sections` s on s.id = c.section_id ' .
-            'GROUP BY course_id';
+            'GROUP BY m.course'.
+            'WHERE m.course LIKE ?';
+
+        return $this->execute($sql, [$course], $limit, $offset)->fetchAll();
+    }
+
+    public function getSectionsStats($limit = null, $offset = null)
+    {
+        $sql = 'SELECT m.section as name, ' .
+            'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, ' .
+            'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, ' .
+            'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, ' .
+            'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed ' .
+            'FROM `*PREFIX*cbreeder_materials` m ' .
+            'GROUP BY m.section';
 
         return $this->execute($sql, [], $limit, $offset)->fetchAll();
     }

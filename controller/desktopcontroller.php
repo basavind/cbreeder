@@ -64,9 +64,30 @@ class DesktopController extends Controller
      * @NoAdminRequired
      * @NoCSRFRequired
      */
+    public function sections()
+    {
+        $sections = $this->mapper->getSectionsStats();
+        $params = [
+            'user' => $this->userId,
+            'sections' => $sections,
+        ];
+
+        return new TemplateResponse('cbreeder', 'desktop.sections', $params);  // templates/main.php
+    }
+
+    /**
+     * CAUTION: the @Stuff turns off security checks; for this page no admin is
+     *          required and no CSRF check. If you don't know what CSRF is, read
+     *          it up in the docs or you might create a security hole. This is
+     *          basically the only required method to add this exemption, don't
+     *          add it to any other method if you don't exactly know what it does.
+     *
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
     public function courses()
     {
-        $courses = $this->mapper->getStats();
+        $courses = $this->mapper->getCoursesStats();
         $params = [
             'user' => $this->userId,
             'courses' => $courses,

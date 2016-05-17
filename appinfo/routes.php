@@ -21,6 +21,7 @@ return [
     'routes' => [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
         ['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
+        ['name' => 'desktop#sections', 'url' => '/desktop/sections', 'verb' => 'GET'],
         ['name' => 'desktop#courses', 'url' => '/desktop/courses', 'verb' => 'GET'],
         ['name' => 'desktop#course', 'url' => '/desktop/courses/{anchor}', 'verb' => 'GET'],
         ['name' => 'material#stage', 'url' => '/material/{materialId}/stage/{direction}', 'verb' => 'POST'],
