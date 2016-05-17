@@ -12,7 +12,7 @@ namespace OCA\CBreeder\Controller;
  * @copyright Dmitry Basavin 2016
  */
 
-use OCA\Cbreeder\DB\MaterialMapper;
+use OCA\Cbreeder\Materials\MaterialMapper;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\TemplateResponse;

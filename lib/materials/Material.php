@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\CBreeder\DB;
+namespace OCA\CBreeder\Materials;
 
 use OCA\CBreeder\Materials\UndefinedStageException;
 use OCP\AppFramework\Db\Entity;

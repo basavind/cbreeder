@@ -6,7 +6,7 @@ use OCA\CBreeder\Materials\Presentation;
 use OCA\CBreeder\Materials\Text;
 use OCA\CBreeder\Materials\Video;
 use PHPUnit_Framework_TestCase;
-use OCA\CBreeder\DB\Material;
+use OCA\CBreeder\Materials\Material;
 
 class MaterialTest extends PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\Cbreeder\DB;
+namespace OCA\Cbreeder\Materials;
 
 use OCA\CBreeder\RoleManager\RoleManager;
 use OCP\AppFramework\Db\Mapper;

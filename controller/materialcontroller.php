@@ -12,8 +12,8 @@ namespace OCA\CBreeder\Controller;
  * @copyright Dmitry Basavin 2016
  */
 
-use OCA\CBreeder\DB\Material;
-use OCA\Cbreeder\DB\MaterialMapper;
+use OCA\CBreeder\Materials\Material;
+use OCA\Cbreeder\Materials\MaterialMapper;
 use OCA\CBreeder\Materials\UndefinedStageException;
 use OCA\CBreeder\RoleManager\RoleManager;
 use OCP\AppFramework\Controller;
