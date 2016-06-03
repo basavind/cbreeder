@@ -13,6 +13,8 @@ namespace OCA\CBreeder\AppInfo;
 
 use OCP\AppFramework\App;
 
+require_once 'helpers.php';
+
 /**
  * Additional autoloader registration, e.g. registering composer autoloaders
  */
