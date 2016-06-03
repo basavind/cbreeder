@@ -2,14 +2,23 @@
 
 namespace OCA\CBreeder\RoleManager;
 
-use OC;
-use OC_User;
+use OC\Group\Manager as GroupManager;
+use OC\User\Session as UserSession;
 
 /**
  * Class Manager.
  */
 class RoleManager
 {
+
+    private $user;
+    private $groupManager;
+
+    public function __construct(GroupManager $groupManager, UserSession $session)
+    {
+        $this->user = $session->getUser();
+        $this->groupManager = $groupManager;
+    }
     /**
      * Get associated with user roles.
      *
@@ -18,9 +27,8 @@ class RoleManager
     public function getRoles()
     {
         $roles = [];
-        $user = OC_User::getUser();
         foreach (config('roles') as $role => $params) {
-            if (OC::$server->getGroupManager()->isInGroup($user, $params['group'])) {
+            if ($this->groupManager->isInGroup($this->user, $params['group'])) {
                 $roles[] = $role;
             }
         }
@@ -36,9 +44,8 @@ class RoleManager
     public function getAllowedStages()
     {
         $stages = [];
-        $user = OC_User::getUser();
         foreach (config('roles') as $role => $params) {
-            if (OC::$server->getGroupManager()->isInGroup($user, $params['group'])) {
+            if ($this->groupManager->isInGroup($this->user, $params['group'])) {
                 $stages = array_merge($stages, $params['stages']);
             }
         }
