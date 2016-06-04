@@ -58,10 +58,15 @@ class CourseController extends Controller
      *
      * @NoAdminRequired
      * @NoCSRFRequired
+     *
+     * @param $section
+     *
+     * @return \OCP\AppFramework\Http\TemplateResponse
+     * @throws \Exception
      */
-    public function index()
+    public function index($section)
     {
-        $courses = $this->mapper->getCoursesStats();
+        $courses = $this->mapper->getCoursesFor($section);
         $params = [
             'user' => $this->userId,
             'courses' => $courses,
