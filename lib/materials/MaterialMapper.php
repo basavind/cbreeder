@@ -122,7 +122,7 @@ class MaterialMapper extends Mapper
         if (empty($slug)) {
             throw new \Exception();
         }
-        $sql = 'SELECT DISTINCT m.section as section_name'
+        $sql = 'SELECT DISTINCT m.section as section_name '
             .'FROM `*PREFIX*cbreeder_materials` m '
             .'WHERE m.`section_slug` LIKE ?;';
         $result = $this->execute($sql, [$slug])->fetch();
