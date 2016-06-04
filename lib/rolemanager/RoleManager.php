@@ -35,6 +35,7 @@ class RoleManager
         $this->userId = $this->userSession->getUser()->getUID();
         $this->groupManager = $groupManager;
     }
+
     /**
      * Get associated with user roles.
      *
