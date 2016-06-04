@@ -18,6 +18,7 @@ use OCA\CBreeder\Materials\UndefinedStageException;
 use OCA\CBreeder\RoleManager\RoleManager;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 
 class MaterialController extends Controller
@@ -66,6 +67,31 @@ class MaterialController extends Controller
         $this->userId = $UserId;
         $this->mapper = $mapper;
         $this->roleManager = $roleManager;
+    }
+
+    /**
+     * CAUTION: the @Stuff turns off security checks; for this page no admin is
+     *          required and no CSRF check. If you don't know what CSRF is, read
+     *          it up in the docs or you might create a security hole. This is
+     *          basically the only required method to add this exemption, don't
+     *          add it to any other method if you don't exactly know what it does.
+     *
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    public function index()
+    {
+        $materials = $this->mapper->getAllowed();
+        $params = [
+            'user' => $this->userId,
+            'course' => [
+                'section' => 'Mathematics',
+                'name' => 'Differential equations',
+            ],
+            'materials' => $materials,
+        ];
+
+        return new TemplateResponse('cbreeder', 'material/index', $params);
     }
 
     /**
