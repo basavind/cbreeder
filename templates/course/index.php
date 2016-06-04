@@ -25,7 +25,7 @@ style('cbreeder', 'style');
                 <?php foreach ($_['courses'] as $course): ?>
                     <tr>
                         <td>
-                            <a href="courses/<?php p($course['id']) ?>">
+                            <a href="course/<?php p($course['slug']) ?>/material">
                                 <?php p($course['name']) ?>
                             </a>
                         </td>
