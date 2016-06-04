@@ -11,6 +11,9 @@ style('cbreeder', 'style');
 
     <div id="app-content">
         <div id="app-content-wrapper">
+            <header>
+                <h1><?php p($_['sectionName']) ?></h1>
+            </header>
             <table>
                 <thead>
                 <tr>

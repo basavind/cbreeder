@@ -116,4 +116,15 @@ class MaterialMapper extends Mapper
 
         return $this->execute($sql, [], $limit, $offset)->fetchAll();
     }
+
+    public function getSectionNameFor($slug)
+    {
+        if (empty($slug)) {
+            throw new \Exception();
+        }
+        $sql = 'SELECT DISTINCT m.section as section_name FROM `*PREFIX*cbreeder_materials` m WHERE m.`section_slug` LIKE ?;';
+        $result = $this->execute($sql, [$slug])->fetch();
+
+        return $result['section_name'];
+    }
 }

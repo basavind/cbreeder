@@ -62,13 +62,16 @@ class CourseController extends Controller
      * @param $section
      *
      * @return \OCP\AppFramework\Http\TemplateResponse
+     *
      * @throws \Exception
      */
     public function index($section)
     {
+        $sectionName = $this->mapper->getSectionNameFor($section);
         $courses = $this->mapper->getCoursesFor($section);
         $params = [
             'user' => $this->userId,
+            'sectionName' => $sectionName,
             'courses' => $courses,
         ];
 
