@@ -129,4 +129,17 @@ class MaterialMapper extends Mapper
 
         return $result['section_name'];
     }
+
+    public function getCourseNameFor($slug)
+    {
+        if (empty($slug)) {
+            throw new \Exception();
+        }
+        $sql = 'SELECT DISTINCT m.course as course_name '
+            .'FROM `*PREFIX*cbreeder_materials` m '
+            .'WHERE m.`course_slug` LIKE ?;';
+        $result = $this->execute($sql, [$slug])->fetch();
+
+        return $result['course_name'];
+    }
 }

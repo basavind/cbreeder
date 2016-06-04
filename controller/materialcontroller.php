@@ -78,12 +78,21 @@ class MaterialController extends Controller
      *
      * @NoAdminRequired
      * @NoCSRFRequired
+     *
+     * @param $section
+     * @param $course
+     *
+     * @return \OCP\AppFramework\Http\TemplateResponse
      */
-    public function index()
+    public function index($section, $course)
     {
+        $sectionName = $this->mapper->getSectionNameFor($section);
+        $courseName = $this->mapper->getCourseNameFor($course);
         $materials = $this->mapper->getAllowed();
         $params = [
             'user' => $this->userId,
+            'sectionName' => $sectionName,
+            'courseName' => $courseName,
             'course' => [
                 'section' => 'Mathematics',
                 'name' => 'Differential equations',
