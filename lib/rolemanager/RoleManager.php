@@ -2,21 +2,37 @@
 
 namespace OCA\CBreeder\RoleManager;
 
-use OC\Group\Manager as GroupManager;
-use OC\User\Session as UserSession;
+use OCP\IGroupManager;
+use OCP\IUserSession;
 
 /**
  * Class Manager.
  */
 class RoleManager
 {
-
-    private $user;
+    /**
+     * @var string
+     */
+    private $userId;
+    /**
+     * @var \OCP\IGroupManager
+     */
     private $groupManager;
+    /**
+     * @var \OCP\IUserSession
+     */
+    private $userSession;
 
-    public function __construct(GroupManager $groupManager, UserSession $session)
+    /**
+     * RoleManager constructor.
+     *
+     * @param \OCP\IGroupManager $groupManager
+     * @param \OCP\IUserSession  $userSession
+     */
+    public function __construct(IGroupManager $groupManager, IUserSession $userSession)
     {
-        $this->user = $session->getUser();
+        $this->userSession = $userSession;
+        $this->userId = $this->userSession->getUser()->getUID();
         $this->groupManager = $groupManager;
     }
     /**
@@ -28,7 +44,7 @@ class RoleManager
     {
         $roles = [];
         foreach (config('roles') as $role => $params) {
-            if ($this->groupManager->isInGroup($this->user, $params['group'])) {
+            if ($this->groupManager->isInGroup($this->userId, $params['group'])) {
                 $roles[] = $role;
             }
         }
@@ -45,7 +61,7 @@ class RoleManager
     {
         $stages = [];
         foreach (config('roles') as $role => $params) {
-            if ($this->groupManager->isInGroup($this->user, $params['group'])) {
+            if ($this->groupManager->isInGroup($this->userId, $params['group'])) {
                 $stages = array_merge($stages, $params['stages']);
             }
         }
