@@ -3,11 +3,9 @@
 /**
  * Get config array.
  *
- * return mixed
- *
  * @param string|null $section
  *
- * @return mixed|null
+ * @return array|null
  */
 function config($section = null)
 {
