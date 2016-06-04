@@ -34,8 +34,8 @@ class MaterialMapper extends Mapper
      */
     public function find($id)
     {
-        $sql = 'SELECT * FROM `*PREFIX*cbreeder_materials`'.
-            'WHERE `id` = ?';
+        $sql = 'SELECT * FROM `*PREFIX*cbreeder_materials` '
+            .'WHERE `id` = ?';
 
         return $this->findEntity($sql, [$id]);
     }
@@ -74,14 +74,14 @@ class MaterialMapper extends Mapper
 
     public function getCoursesStats($course, $limit = null, $offset = null)
     {
-        $sql = 'SELECT m.course as name, ' .
-            'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, ' .
-            'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, ' .
-            'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, ' .
-            'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed ' .
-            'FROM `*PREFIX*cbreeder_materials` m ' .
-            'GROUP BY m.course'.
-            'WHERE m.course LIKE ?';
+        $sql = 'SELECT m.course as name, '
+            .'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, '
+            .'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, '
+            .'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, '
+            .'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed '
+            .'FROM `*PREFIX*cbreeder_materials` m '
+            .'GROUP BY m.course'
+            .'WHERE m.course LIKE ?';
 
         return $this->execute($sql, [$course], $limit, $offset)->fetchAll();
     }
@@ -106,13 +106,13 @@ class MaterialMapper extends Mapper
 
     public function getSectionsStats($limit = null, $offset = null)
     {
-        $sql = 'SELECT m.section as name, m.section_slug as slug, ' .
-            'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, ' .
-            'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, ' .
-            'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, ' .
-            'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed ' .
-            'FROM `*PREFIX*cbreeder_materials` m ' .
-            'GROUP BY m.section';
+        $sql = 'SELECT m.section as name, m.section_slug as slug, '
+            .'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, '
+            .'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, '
+            .'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, '
+            .'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed '
+            .'FROM `*PREFIX*cbreeder_materials` m '
+            .'GROUP BY m.section';
 
         return $this->execute($sql, [], $limit, $offset)->fetchAll();
     }
@@ -122,7 +122,9 @@ class MaterialMapper extends Mapper
         if (empty($slug)) {
             throw new \Exception();
         }
-        $sql = 'SELECT DISTINCT m.section as section_name FROM `*PREFIX*cbreeder_materials` m WHERE m.`section_slug` LIKE ?;';
+        $sql = 'SELECT DISTINCT m.section as section_name'
+            .'FROM `*PREFIX*cbreeder_materials` m '
+            .'WHERE m.`section_slug` LIKE ?;';
         $result = $this->execute($sql, [$slug])->fetch();
 
         return $result['section_name'];
