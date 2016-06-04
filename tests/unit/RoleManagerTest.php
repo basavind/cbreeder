@@ -31,9 +31,14 @@ class RoleManagerTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->userSessionMock = $this->getMockBuilder(\OC\User\Session::class)
-            ->setMethods(['getUser'])
+            ->setMethods(['getUser', 'getUID'])
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->userSessionMock
+            ->expects($this->any())
+            ->method('getUser')
+            ->will($this->returnValue($this->userSessionMock));
     }
 
     /** @test */
