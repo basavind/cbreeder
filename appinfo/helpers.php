@@ -11,7 +11,7 @@
  */
 function config($section = null)
 {
-    $config = include_once 'cbreederconfig.php';
+    $config = include 'cbreederconfig.php';
     if (is_null($section)) {
         return $config;
     } else {
