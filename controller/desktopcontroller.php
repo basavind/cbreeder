@@ -30,17 +30,17 @@ class DesktopController extends Controller
     /**
      * Map materials from db.
      *
-     * @var \OCA\CBreeder\DB\MaterialMapper
+     * @var \OCA\Cbreeder\Materials\MaterialMapper
      */
     private $mapper;
 
     /**
      * DesktopController constructor.
      *
-     * @param string                          $AppName
-     * @param \OCP\IRequest                   $request
-     * @param \OCA\Cbreeder\DB\MaterialMapper $mapper
-     * @param                                 $UserId
+     * @param string                                 $AppName
+     * @param \OCP\IRequest                          $request
+     * @param \OCA\Cbreeder\Materials\MaterialMapper $mapper
+     * @param                                        $UserId
      *
      * @internal param \OCA\CBreeder\DB\MaterialMapper $materialMapper
      */
