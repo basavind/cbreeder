@@ -91,6 +91,9 @@ class MaterialMapper extends Mapper
         if (empty($section)) {
             throw new \Exception();
         }
+
+        $stages = $this->roleManager->getAllowedStages();
+        $binds = implode(',', array_fill(0, count($stages), '?'));
         $sql = 'SELECT m.course as name, '
             .'m.course_slug as slug, '
             .'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, '
@@ -99,22 +102,30 @@ class MaterialMapper extends Mapper
             .'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed '
             .'FROM `*PREFIX*cbreeder_materials` m '
             .'WHERE m.section_slug = ? '
+            ."AND m.stage in ({$binds}) "
             .'GROUP BY m.course_slug ';
 
-        return $this->execute($sql, [$section], $limit, $offset)->fetchAll();
+        $params = array_merge([$section], $stages);
+
+        return $this->execute($sql, $params, $limit, $offset)->fetchAll();
     }
 
     public function getSectionsStats($limit = null, $offset = null)
     {
+        $stages = $this->roleManager->getAllowedStages();
+        $binds = implode(',', array_fill(0, count($stages), '?'));
         $sql = 'SELECT m.section as name, m.section_slug as slug, '
             .'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, '
             .'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, '
             .'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, '
             .'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed '
             .'FROM `*PREFIX*cbreeder_materials` m '
+            ."WHERE m.stage in ({$binds}) "
             .'GROUP BY m.section';
 
-        return $this->execute($sql, [], $limit, $offset)->fetchAll();
+        $params = array_merge($stages);
+
+        return $this->execute($sql, $params, $limit, $offset)->fetchAll();
     }
 
     public function getSectionNameFor($slug)
