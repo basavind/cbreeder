@@ -202,7 +202,11 @@ abstract class Material extends Entity
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'course_id' => $this->getCourseId(),
+            'name_slug' => $this->getNameSlug(),
+            'course' => $this->getCourse(),
+            'course_slug' => $this->getCourseSlug(),
+            'section' => $this->getSection(),
+            'section_slug' => $this->getSectionSlug(),
             'state' => $this->getState(),
             'stage' => $this->getStage(),
             'stages' => $this->getStages(),
