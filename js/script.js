@@ -10,7 +10,9 @@
 
 (function ($, OC) {
     $(document).ready(function () {
-        MaterialHelper.bindStageClick();
+        if (window.MaterialHelper !== undefined) {
+            MaterialHelper.bindStageClick();
+        }
     });
 
 })(jQuery, OC);
