@@ -18,6 +18,7 @@ use OCA\CBreeder\Materials\UndefinedStageException;
 use OCA\CBreeder\RoleManager\RoleManager;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 
@@ -160,5 +161,15 @@ class MaterialController extends Controller
                 'material' => 'Not allowed',
             ]);
         }
+    }
+
+    public function load()
+    {
+        return new TemplateResponse('cbreeder', 'material/form');
+    }
+
+    public function upload()
+    {
+        return new RedirectResponse('/apps/cbreeder');
     }
 }
