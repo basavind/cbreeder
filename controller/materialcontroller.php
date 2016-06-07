@@ -132,7 +132,7 @@ class MaterialController extends Controller
     {
         if ( ! key_exists($direction, $this->stageDirections)) {
             return new DataResponse([
-                'ok' => 'false',
+                'ok' => false,
                 'message' => 'Stage direction doesn\'t set',
             ]);
         }
