@@ -21,6 +21,7 @@ use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 
 class MaterialController extends Controller
 {
@@ -48,12 +49,18 @@ class MaterialController extends Controller
     private $roleManager;
 
     /**
+     * @var \OCP\IURLGenerator
+     */
+    private $urlGenerator;
+
+    /**
      * DesktopController constructor.
      *
      * @param string                                 $AppName
      * @param \OCP\IRequest                          $request
      * @param \OCA\Cbreeder\Materials\MaterialMapper $mapper
      * @param \OCA\CBreeder\RoleManager\RoleManager  $roleManager
+     * @param \OCP\IURLGenerator                     $urlGenerator
      * @param                                        $UserId
      *
      * @internal param \OCA\CBreeder\DB\MaterialMapper $materialMapper
@@ -62,12 +69,14 @@ class MaterialController extends Controller
                                 IRequest $request,
                                 MaterialMapper $mapper,
                                 RoleManager $roleManager,
+                                IURLGenerator $urlGenerator,
                                 $UserId)
     {
         parent::__construct($AppName, $request);
         $this->userId = $UserId;
         $this->mapper = $mapper;
         $this->roleManager = $roleManager;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -181,6 +190,9 @@ class MaterialController extends Controller
      */
     public function upload()
     {
-        return new RedirectResponse('/apps/cbreeder');
+        $route = 'cbreeder.section.index';
+        $url = $this->urlGenerator->linkToRoute($route);
+
+        return new RedirectResponse($url);
     }
 }
