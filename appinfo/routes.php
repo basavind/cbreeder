@@ -25,7 +25,7 @@ return [
 
         ['name' => 'material#index', 'url' => '/section/{section}/course/{course}/material', 'verb' => 'GET'],
         ['name' => 'material#stage', 'url' => '/material/{materialId}/stage/{direction}', 'verb' => 'POST'],
-        ['name' => 'material#load', 'url' => '/material}', 'verb' => 'GET'],
-        ['name' => 'material#upload', 'url' => '/material}', 'verb' => 'POST'],
+        ['name' => 'material#load', 'url' => '/material', 'verb' => 'GET'],
+        ['name' => 'material#upload', 'url' => '/material', 'verb' => 'POST'],
     ]
 ];
