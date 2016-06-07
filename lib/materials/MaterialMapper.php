@@ -34,8 +34,7 @@ class MaterialMapper extends Mapper
      */
     public function find($id)
     {
-        $sql = 'SELECT * FROM `*PREFIX*cbreeder_materials` '
-            .'WHERE `id` = ?';
+        $sql = "SELECT * FROM {$this->tableName} WHERE `id` = ?";
 
         return $this->findEntity($sql, [$id]);
     }
@@ -50,7 +49,7 @@ class MaterialMapper extends Mapper
      */
     public function findAll($limit = null, $offset = null)
     {
-        $sql = 'SELECT * FROM `*PREFIX*cbreeder_materials`';
+        $sql = "SELECT * FROM {$this->tableName}";
 
         return $this->findEntities($sql, [], $limit, $offset);
     }
@@ -67,7 +66,7 @@ class MaterialMapper extends Mapper
     {
         $stages = $this->roleManager->getAllowedStages();
         $binds = implode(',', array_fill(0, count($stages), '?'));
-        $sql = "SELECT * FROM `*PREFIX*cbreeder_materials` WHERE stage IN ({$binds})";
+        $sql = "SELECT * FROM {$this->tableName} WHERE stage IN ({$binds})";
 
         return $this->findEntities($sql, $stages, $limit, $offset);
     }
@@ -82,11 +81,11 @@ class MaterialMapper extends Mapper
         $binds = implode(',', array_fill(0, count($stages), '?'));
         $sql = 'SELECT m.course as name, '
             .'m.course_slug as slug, '
-            .'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, '
-            .'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, '
-            .'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, '
-            .'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed '
-            .'FROM `*PREFIX*cbreeder_materials` m '
+            ."COUNT(CASE WHEN state LIKE 'Доступен' THEN 1 ELSE NULL END) as available, "
+            ."COUNT(CASE WHEN state LIKE 'В работе' THEN 1 ELSE NULL END) as in_work, "
+            ."COUNT(CASE WHEN state LIKE 'Возвращен на доработку' THEN 1 ELSE NULL END) as reverted, "
+            ."COUNT(CASE WHEN state LIKE 'Завершён' THEN 1 ELSE NULL END) as completed "
+            ."FROM {$this->tableName} m "
             .'WHERE m.section_slug = ? '
             ."AND m.stage in ({$binds}) "
             .'GROUP BY m.course_slug ';
@@ -101,11 +100,11 @@ class MaterialMapper extends Mapper
         $stages = $this->roleManager->getAllowedStages();
         $binds = implode(',', array_fill(0, count($stages), '?'));
         $sql = 'SELECT m.section as name, m.section_slug as slug, '
-            .'COUNT(CASE WHEN state LIKE \'Доступен\' THEN 1 ELSE NULL END) as available, '
-            .'COUNT(CASE WHEN state LIKE \'В работе\' THEN 1 ELSE NULL END) as in_work, '
-            .'COUNT(CASE WHEN state LIKE \'Возвращен на доработку\' THEN 1 ELSE NULL END) as reverted, '
-            .'COUNT(CASE WHEN state LIKE \'Завершён\' THEN 1 ELSE NULL END) as completed '
-            .'FROM `*PREFIX*cbreeder_materials` m '
+            ."COUNT(CASE WHEN state LIKE 'Доступен' THEN 1 ELSE NULL END) as available, "
+            ."COUNT(CASE WHEN state LIKE 'В работе' THEN 1 ELSE NULL END) as in_work, "
+            ."COUNT(CASE WHEN state LIKE 'Возвращен на доработку' THEN 1 ELSE NULL END) as reverted, "
+            ."COUNT(CASE WHEN state LIKE 'Завершён' THEN 1 ELSE NULL END) as completed "
+            ."FROM {$this->tableName} m "
             ."WHERE m.stage in ({$binds}) "
             .'GROUP BY m.section';
 
@@ -120,7 +119,7 @@ class MaterialMapper extends Mapper
             throw new \Exception();
         }
         $sql = 'SELECT DISTINCT m.section as section_name '
-            .'FROM `*PREFIX*cbreeder_materials` m '
+            ."FROM {$this->tableName} m "
             .'WHERE m.`section_slug` LIKE ?;';
         $result = $this->execute($sql, [$slug])->fetch();
 
@@ -133,7 +132,7 @@ class MaterialMapper extends Mapper
             throw new \Exception();
         }
         $sql = 'SELECT DISTINCT m.course as course_name '
-            .'FROM `*PREFIX*cbreeder_materials` m '
+            ."FROM {$this->tableName} m "
             .'WHERE m.`course_slug` LIKE ?;';
         $result = $this->execute($sql, [$slug])->fetch();
 
