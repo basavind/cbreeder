@@ -88,7 +88,7 @@ class MaterialController extends Controller
     {
         $sectionName = $this->mapper->getSectionNameFor($section);
         $courseName = $this->mapper->getCourseNameFor($course);
-        $materials = $this->mapper->getAllowed();
+        $materials = $this->mapper->getAllowedMapper();
         $params = [
             'user' => $this->userId,
             'sectionName' => $sectionName,

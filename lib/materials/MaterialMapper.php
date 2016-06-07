@@ -62,7 +62,7 @@ class MaterialMapper extends Mapper
      *
      * @return array
      */
-    public function getAllowed($limit = null, $offset = null)
+    public function getAllowedMapper($limit = null, $offset = null)
     {
         $stages = $this->roleManager->getAllowedStages();
         $binds = implode(',', array_fill(0, count($stages), '?'));
