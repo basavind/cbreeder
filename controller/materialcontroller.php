@@ -163,11 +163,22 @@ class MaterialController extends Controller
         }
     }
 
+    /**
+     * @return \OCP\AppFramework\Http\TemplateResponse
+     *
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
     public function load()
     {
         return new TemplateResponse('cbreeder', 'material/form');
     }
 
+    /**
+     * @return \OCP\AppFramework\Http\RedirectResponse
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
     public function upload()
     {
         return new RedirectResponse('/apps/cbreeder');
