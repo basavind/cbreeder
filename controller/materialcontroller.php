@@ -50,11 +50,11 @@ class MaterialController extends Controller
     /**
      * DesktopController constructor.
      *
-     * @param string                                $AppName
-     * @param \OCP\IRequest                         $request
-     * @param \OCA\Cbreeder\DB\MaterialMapper       $mapper
-     * @param \OCA\CBreeder\RoleManager\RoleManager $roleManager
-     * @param                                       $UserId
+     * @param string                                 $AppName
+     * @param \OCP\IRequest                          $request
+     * @param \OCA\Cbreeder\Materials\MaterialMapper $mapper
+     * @param \OCA\CBreeder\RoleManager\RoleManager  $roleManager
+     * @param                                        $UserId
      *
      * @internal param \OCA\CBreeder\DB\MaterialMapper $materialMapper
      */
